@@ -1,0 +1,22 @@
+<?xml version="1.0"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>  
+    <class name="orm.entity.Project" table="project">  
+        <id name="id" column="id" type="string">
+			 <generator class="assigned"/>
+		</id>
+        <property name="name" column="name" type="string" />  
+        <property name="description" column="description" type="string" />  
+        <property name="mentor" column="mentor" type="string" />  
+        <set name="students" table="stu_project" inverse="true"
+            cascade="save-update,delete">
+            <key>
+                <column name="projectid" not-null="true" />
+            </key>
+            <many-to-many class="orm.entity.Student" column="studentid" />
+        </set>
+       
+    </class>  
+</hibernate-mapping>
